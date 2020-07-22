@@ -1,42 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import marketIcon from './assets/marketIcon.svg';
 import liderCart from './assets/liderCart.svg';
 import './App.css';
+import Products from './components/Products/Products';
 
-function App() {
+function App(props) {
+
+  const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState('');
+
+  const getProducts = () => {
+    fetch(`http://localhost:8080/api/products?query=${search}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setProducts(result.data);
+          console.log(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+  };
+
   return (
     <div>
       <section>
-        <div class="d-flex">
-          <div id="header" class="header-info">
+        <div className="d-flex">
+          <div id="header" className="header-info">
             <span>Servicio al cliente de Lider.cl: WhatsApp <a href="https://api.whatsapp.com/send?phone=56957211492&amp;text=Hola!%20Tengo%20una%20consulta">+56957211492</a>
        | Horario: de lunes a viernes de 8:00 a 22:00 y sábado, domingo y festivos de 9:00 a 22:00</span>
           </div>
-          <div class="site-header compact" style={{ backgroundColor: '#0071ce' }}>
-            <div class="logo">
-              <a href="#"><img alt="Lider Logo" src={logo} /></a>
+          <div className="site-header compact" style={{ backgroundColor: '#0071ce' }}>
+            <div className="logo">
+              <a href="."><img alt="Lider Logo" src={logo} /></a>
             </div>
-            <div class="menu-icon-container">
+            <div className="menu-icon-container">
               <div style={{ cursor: 'pointer' }}>
-                <i class="zmdi zmdi-menu menu-icon"></i>
-                <div class="show-category">Categorías</div>
+                <i className="zmdi zmdi-menu menu-icon"></i>
+                <div className="show-category">Categorías</div>
               </div>
             </div>
 
             <div style={{ width: '100%', margin: '0px 4%' }}>
-              <div class="search-width">
-                <div class="search-box-container-header" style={{ paddingTop: '10px' }}>
+              <div className="search-width">
+                <div className="search-box-container-header" style={{ paddingTop: '10px' }}>
                   <section>
-                    <div class="ais-InstantSearch__root">
-                      <div class="ais-InstantSearch__root">
-                        {/* <div class="search-overlay"></div> */}
-                        <div class="ais-SearchBox">
-                          <form class="ais-SearchBox-form" role="search">
-                            <input type="search" placeholder="¿Qué estás buscando?" maxlength="512" class="ais-SearchBox-input" value="" autofocus="" />
-                            <button type="submit" title="Submit your search query." class="ais-SearchBox-submit search-input-icons">
-                              {/* <i class="zmdi zmdi-search ais-SearchBox-submitIcon"></i> */}
-                              <svg class="ais-SearchBox-submitIcon"
+                    <div className="ais-InstantSearch__root">
+                      <div className="ais-InstantSearch__root">
+                        <div className="ais-SearchBox">
+                          <form className="ais-SearchBox-form" role="search">
+                            <input type="search" placeholder="¿Qué estás buscando?" className="ais-SearchBox-input"
+                              value={search} onChange={e => setSearch(e.target.value)}/>
+                            <button type="submit" title="Submit your search query." className="ais-SearchBox-submit search-input-icons" onClick={getProducts}>
+                              <svg className="ais-SearchBox-submitIcon"
                                 xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 40 40">
                                 <path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"></path>
                               </svg>
@@ -50,19 +68,19 @@ function App() {
               </div>
             </div>
 
-            <div class="cart-supermarket-width">
-              <div class="cart-container" style={{ backgroundColor: 'rgb(6, 86, 143)' }}>
-                <a aria-haspopup="true" href="#" class="p-0 nav-link" aria-expanded="false">
-                  <div id="shoppingCart" class="d-flex justify-content-between shopping-cart-images">
+            <div className="cart-supermarket-width">
+              <div className="cart-container" style={{ backgroundColor: 'rgb(6, 86, 143)' }}>
+                <a aria-haspopup="true" href="." className="p-0 nav-link" aria-expanded="false">
+                  <div id="shoppingCart" className="d-flex justify-content-between shopping-cart-images">
                     <img alt="cart" src={liderCart} width="29" height="25" />
-                    <div class="cart-quantity">
-                      <div id="quantityNumber" class="quantity-number">0</div>
+                    <div className="cart-quantity">
+                      <div id="quantityNumber" className="quantity-number">0</div>
                     </div>
                   </div>
                 </a>
               </div>
-              <div class="go-to-supermarket-link">
-                <a href="https://www.lider.cl/supermercado" target="_blank" rel="noopener noreferrer">
+              <div className="go-to-supermarket-link">
+                <a href="." target="_blank" rel="noopener noreferrer">
                   <img alt="market-icon" width="20" src={marketIcon} style={{ marginRight: '5px' }} />Supermercado</a>
               </div>
             </div>
@@ -70,12 +88,15 @@ function App() {
           </div>
         </div>
       </section>
-      <div>
-
-      </div>
+      <section>
+        <div className="AppContainer">
+          <div className="AppFilters">
+            
+          </div>
+          <Products products={products} />
+        </div>
+      </section>
     </div >
-
-
   );
 }
 
