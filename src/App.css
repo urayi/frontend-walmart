@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,283 @@
   to {
     transform: rotate(360deg);
   }
+}
+ */
+
+.header-info {
+  color: #fff;
+  background-color: #003758;
+  position: fixed;
+  z-index: 5;
+  height: 30px;
+  width: 100%;
+}
+
+.site-header {
+  width: 100%;
+  height: 74px;
+  background-color: #0071ce;
+  display: flex;
+  z-index: 5;
+  position: fixed;
+  padding-bottom: 40px;
+  margin-top: 30px;
+}
+
+.site-header.compact {
+  height: 58px;
+}
+
+.site-header.compact .logo img {
+  width: 152px;
+  height: 35px;
+  margin-top: 11px;
+  margin-left: -10px;
+}
+
+.menu-icon-container {
+  left: 250px;
+  height: 44px;
+  min-width: 140px;
+  background-color: #06568f;
+  color: #fff;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+
+.menu-icon {
+  cursor: pointer;
+  font-size: 25px;
+  margin-left: 13px;
+  margin-top: 9px;
+  margin-right: 10px;
+}
+
+.zmdi {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.zmdi-menu:before {
+  content: '\f197';
+}
+
+.show-category {
+  display: inline-block;
+  position: absolute;
+  padding-top: 11px;
+}
+
+div {
+  display: block;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.cart-supermarket-width {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 270px;
+}
+
+* {
+  outline: none;
+}
+
+.go-to-supermarket-link {
+  width: 144px;
+  height: 42px;
+  border-radius: 3px;
+  background-color: #5fb446;
+  text-align: center;
+  margin-left: 10px;
+  padding-top: 9px;
+  margin-top: 8px;
+}
+
+.go-to-supermarket-link a {
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.cart-container {
+  height: 58px;
+  width: 100px;
+  background-color: #06568f;
+}
+
+@media (min-width: 768.5px) {
+  .cart-container {
+    height: 44px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    border-radius: 5px;
+}}
+
+.p-0, .square-10, .square-15, .square-20, .square-30, .square-40, .size-40, .square-50, .square-60, .size-60, .square-70, .square-80, .size-80, .square-100, .size-100, .square-120, .size-120 {
+  padding: 0!important;
+}
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+}
+
+a {
+  color: #5d92f4;
+  transition: all .5s ease 0s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.dropdown {
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 20px;
+  position: unset;
+}
+
+.list-inline-item {
+  display: inline-block;
+}
+
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+@media (min-width: 768.5px){
+  .shopping-cart-images {
+    padding-top: 8px;
+  }
+}
+
+.shopping-cart-images {
+  padding-left: 25px;
+  padding-right: 10px;
+}
+
+.justify-content-between {
+  justify-content: space-between!important;
+}
+
+.d-flex {
+  display: flex!important;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.cart-quantity {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background-color: #ffc220;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.quantity-number {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: #06568f;
+}
+
+.search-box-container-header input {
+  border-radius: 26px;
+  height: 35px;
+  font-size: 16px;
+}
+
+section {
+  display: block;
+}
+
+.search-overlay {
+  position: absolute;
+  height: 110vh;
+  width: 100%;
+  background: rgba(0,0,0,.5);
+  top: -58px;
+  left: 0;
+}
+
+[class^=ais-] {
+  font-size: 1rem;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #3a4570;
+}
+
+.ais-SearchBox-form {
+  display: block;
+  position: relative;
+}
+
+[type=search] {
+  outline-offset: -2px;
+  -webkit-appearance: none;
+}
+
+.ais-SearchBox-input {
+  padding: .3rem 2.2rem;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #c4c8d8;
+}
+
+.search-input-icons {
+  position: absolute;
+  top: 17px;
+}
+
+button, html [type=button], [type=reset], [type=submit] {
+  -webkit-appearance: button;
+}
+
+input {
+  vertical-align: baseline;
+}
+
+button, input {
+  overflow: visible;
+}
+
+input, button, select, optgroup, textarea {
+  margin: 0;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.ais-SearchBox-submit {
+  left: .6rem;
+  background-color: transparent;
+  border: 0;
+}
+
+.ais-SearchBox-submitIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.ais-SearchBox-submitIcon, .ais-SearchBox-resetIcon, .ais-SearchBox-loadingIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
