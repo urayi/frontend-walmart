@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: node:13.12.0-alpine
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: IDependencias
+      run: npm install
+
+    - name: Testing
+      run: npm test
+    
+    - name: Start
+      run: npm start
