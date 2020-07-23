@@ -8,13 +8,17 @@ on:
 
 jobs:
   build:
-    runs-on: node:13.12.0-alpine
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 8.x]
 
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
 
-    - name: IDependencias
+    - name: Dependencias
       run: npm install
 
     - name: Testing
