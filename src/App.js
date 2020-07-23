@@ -95,7 +95,7 @@ function App(props) {
         <div className="AppContainer">
           <div className="AppFilters">
             <div>
-              <p className="mb-10 pt-20" style={{fontSize: '18px', display: search ? null : 'none' }}>
+              <p className="mb-10 pt-20" style={{fontSize: '18px', display: search && search !== '' ? null : 'none' }}>
                 Resultados para <strong className="text-capitalize">{search}</strong>:
               </p>
             </div>
