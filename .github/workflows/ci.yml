@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: node:13.12.0-alpine
+    runs-on: node:10
 
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
