@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
 import marketIcon from './assets/marketIcon.svg';
 import liderCart from './assets/liderCart.svg';
 import './App.css';
@@ -8,14 +8,17 @@ import Products from './components/Products/Products';
 function App(props) {
 
   const [products, setProducts] = useState([]);
+  const [isPromotion, setIsPromotion] = useState(false);
   const [search, setSearch] = useState('');
 
-  const getProducts = () => {
-    fetch(`http://localhost:8080/api/products?query=${search}`)
+  const getProducts = (event) => {
+    event.preventDefault();
+    fetch(`http://localhost:8080/api/products?query=${search.trim()}`)
       .then(res => res.json())
       .then(
         (result) => {
           setProducts(result.data);
+          setIsPromotion(result.isPromotion);
           console.log(result);
         },
         (error) => {
@@ -34,7 +37,7 @@ function App(props) {
           </div>
           <div className="site-header compact" style={{ backgroundColor: '#0071ce' }}>
             <div className="logo">
-              <a href="."><img alt="Lider Logo" src={logo} /></a>
+              <a href="/"><img alt="Lider Logo" src={logo} /></a>
             </div>
             <div className="menu-icon-container">
               <div style={{ cursor: 'pointer' }}>
@@ -50,10 +53,10 @@ function App(props) {
                     <div className="ais-InstantSearch__root">
                       <div className="ais-InstantSearch__root">
                         <div className="ais-SearchBox">
-                          <form className="ais-SearchBox-form" role="search">
+                          <form className="ais-SearchBox-form" onSubmit={getProducts}>
                             <input type="search" placeholder="¿Qué estás buscando?" className="ais-SearchBox-input"
-                              value={search} onChange={e => setSearch(e.target.value)}/>
-                            <button type="submit" title="Submit your search query." className="ais-SearchBox-submit search-input-icons" onClick={getProducts}>
+                              value={search} onChange={e => setSearch(e.target.value)} />
+                            <button type="submit" title="Submit your search query." className="ais-SearchBox-submit search-input-icons">
                               <svg className="ais-SearchBox-submitIcon"
                                 xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 40 40">
                                 <path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"></path>
@@ -70,7 +73,7 @@ function App(props) {
 
             <div className="cart-supermarket-width">
               <div className="cart-container" style={{ backgroundColor: 'rgb(6, 86, 143)' }}>
-                <a aria-haspopup="true" href="." className="p-0 nav-link" aria-expanded="false">
+                <a aria-haspopup="true" href="/" className="p-0 nav-link" aria-expanded="false">
                   <div id="shoppingCart" className="d-flex justify-content-between shopping-cart-images">
                     <img alt="cart" src={liderCart} width="29" height="25" />
                     <div className="cart-quantity">
@@ -80,7 +83,7 @@ function App(props) {
                 </a>
               </div>
               <div className="go-to-supermarket-link">
-                <a href="." target="_blank" rel="noopener noreferrer">
+                <a href="/" target="_blank" rel="noopener noreferrer">
                   <img alt="market-icon" width="20" src={marketIcon} style={{ marginRight: '5px' }} />Supermercado</a>
               </div>
             </div>
@@ -91,9 +94,21 @@ function App(props) {
       <section>
         <div className="AppContainer">
           <div className="AppFilters">
-            
+            <div>
+              <p className="mb-10 pt-20" style={{fontSize: '18px', display: search ? null : 'none' }}>
+                Resultados para <strong className="text-capitalize">{search}</strong>:
+              </p>
+            </div>
+            <button className="btn mb-3">Ordenar po: Destacados <i className="zmdi zmdi-chevron-right"></i></button>
           </div>
-          <Products products={products} />
+          <div className="AppProducts d-flex">
+            <div className="AppSidebar col-lg-3 col-md-4">
+              <h1>Filtros</h1>
+            </div>
+            <div className="col-lg-9 col-md-8 col-sm-12">
+              <Products products={products} isPromotion={isPromotion} />
+            </div>
+          </div>
         </div>
       </section>
     </div >
