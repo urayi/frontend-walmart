@@ -117,14 +117,14 @@ function App(props) {
             }
             {
               loading &&
-              <div className="col-lg-9 col-md-6 col-sm-12">
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <div className="col-lg-9 col-md-6 col-sm-12 text-center">
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
               </div>
             }
           </div>
         </div>
       </section>
-    </div >
+    </div>
   );
 }
 
