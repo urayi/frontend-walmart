@@ -16,7 +16,9 @@ const Products = (props) => (
             <p><strong className="text-capitalize">{item.brand}</strong> <span className="text-capitalize">{item.description}</span></p>
             <div className={styles.ProductsPrice}>
               <NumberFormat value={item.price} displayType={'text'} thousandSeparator='.' decimalSeparator=',' decimalScale={0} prefix={'$'} />
-              <span className={styles.walmartDiscountPercentageCard}>{props.isPromotion ? '-50%' : null}</span>
+              <span className={styles.walmartDiscountPercentageCard} style={{ display: props.isPromotion ? null : 'none' }}>
+                {props.isPromotion ? '-50%' : null}
+              </span>
             </div>
             <small style={{ textDecoration: 'line-through', display: props.isPromotion ? null : 'none' }}>
               <NumberFormat value={item.price * 2} displayType={'text'} thousandSeparator='.' decimalSeparator=',' decimalScale={0} prefix={'$'} />

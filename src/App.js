@@ -13,7 +13,7 @@ function App(props) {
 
   const getProducts = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:8080/api/products?query=${search.trim()}`)
+    fetch(`https://walmart-test-api.herokuapp.com/api/products?query=${search.trim()}`)
       .then(res => res.json())
       .then(
         (result) => {

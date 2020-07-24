@@ -1,16 +1,24 @@
-FROM node:13.12.0-alpine
+FROM node:10-alpine
 
-WORKDIR /app
+# Crear Directorio de la APP
+WORKDIR /usr/src/app
 
-ENV PATH /app/node_modules/.bin:$PATH
+# Instalación de dependencias
+COPY package*.json ./
+RUN npm install
 
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+# Testing
+# RUN npm test
 
-COPY . ./
+# Copia archivos
+COPY . .
+# Build para producción
+RUN npm run-script build
 
-EXPOSE 3000:3000
+# Borrado de archivos innecesarios
+RUN rm -rf README.md generate-react-cli.json package-lock.json public src yarn.lock
 
-CMD ["npm", "start"]
+EXPOSE 3000
+
+# Inicia servidor de la APP
+CMD [ "node", "server.js" ]
