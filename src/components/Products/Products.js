@@ -4,10 +4,10 @@ import NumberFormat from 'react-number-format';
 import styles from './Products.module.css';
 
 const Products = (props) => (
-  <div className={styles.Products}>
+  <div className={styles.Products} data-testid="Products">
     {props.products ? props.products.map((item, key) => {
       return (
-        <div key={key} className={styles.ProductsCard}>
+        <div key={key} className={styles.ProductsCard} data-testid={key}>
           <div className={styles.ProductsImageContainer}>
             <div className={styles.productImageShadow}></div>
             <div><img alt="imagen de producto" src={`https://${item.image}`} className={styles.ProductsImage} /></div>
@@ -29,7 +29,7 @@ const Products = (props) => (
           </div>
         </div>
       )
-    }) : <h2>No se Encontraron Productos</h2>}
+    }) : <h2 data-testid='no-data'>No se Encontraron Productos</h2>}
   </div>
 );
 

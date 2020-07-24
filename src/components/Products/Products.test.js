@@ -3,70 +3,74 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Products from './Products';
 
-const data = {
-  "success": true,
-  "isPromotion": true,
-  "data": [
-    {
-      "_id": "5f19a730f286f20e64f75c48",
-      "id": 1,
-      "brand": "JOSE eqrceli",
-      "description": "rlñlw brhrka",
-      "image": "www.lider.cl/catalogo/images/whiteLineIcon.svg",
-      "price": 249362
-    },
-    {
-      "_id": "5f19a730f286f20e64f75c49",
-      "id": 2,
-      "brand": "dsaasd",
-      "description": "zlrwax bñyrh",
-      "image": "www.lider.cl/catalogo/images/babyIcon.svg",
-      "price": 130173
-    },
-    {
-      "_id": "5f19a730f286f20e64f75c75",
-      "id": 46,
-      "brand": "dsasd",
-      "description": "muqn qblmiklf",
-      "image": "www.lider.cl/catalogo/images/furnitureIcon.svg",
-      "price": 32838
-    },
-    {
-      "_id": "5f19a730f286f20e64f75e09",
-      "id": 450,
-      "brand": "dsasd",
-      "description": "hehj qñznvjmt",
-      "image": "www.lider.cl/catalogo/images/gamesIcon.svg",
-      "price": 99739.5
-    }
-  ]
-}
+describe('Sample Test', () => {
+  it('should test that true === true', () => {
+    expect(true).toBe(true)
+  })
+})
 
+describe('Renderizado inicial sin problemas', () => {
 
-let container = null;
-beforeEach(() => {
-  // configurar un elemento del DOM como objetivo del renderizado
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+  let products = [];
+  let isPromotion = false;
 
-afterEach(() => {
-  // limpieza al salir
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-it("renderiza con o sin Data", () => {
-  act(() => {
-    render(<Products />, container);
+  beforeEach(() => {
+    products = [];
+    isPromotion = false;
   });
-  expect(container.products).toBe([]);
 
-  act(() => {
-    render(<Products products={data} isPromotion={false} />, container);
+  test('Render sin productos', () => {
+    const { getByTestId } = render(<Products products={products} isPromotion={isPromotion} />);
+    const product = getByTestId('Products');
+    expect(product).toBeInTheDocument();
   });
-  expect(container.products).toBe(data);
-  expect(container.products).toBe(false);
+
+
+  test('Render con productos sin descuento', () => {
+    products = [
+      {
+        "id": 2,
+        "brand": "dsaasd",
+        "description": "zlrwax bñyrh",
+        "image": "www.lider.cl/catalogo/images/babyIcon.svg",
+        "price": 130173
+      },
+      {
+        "id": 18,
+        "brand": "asdfdsa",
+        "description": "zdczs omedat",
+        "image": "www.lider.cl/catalogo/images/smartphoneIcon.svg",
+        "price": 849666
+      }
+    ];
+
+    const { getByTestId } = render(<Products products={products} />);
+    const product = getByTestId('Products');
+    expect(product).toBeInTheDocument();
+  });
+
+  test('Render con productos con descuento', () => {
+    isPromotion = true;
+    products = [
+      {
+        "id": 552,
+        "brand": "asdsa",
+        "description": "iykqer mrbbd",
+        "image": "www.lider.cl/catalogo/images/babyIcon.svg",
+        "price": 301503.5
+      },
+      {
+        "id": 616,
+        "brand": "asdsa",
+        "description": "fvyñlc kicnh",
+        "image": "www.lider.cl/catalogo/images/gamesIcon.svg",
+        "price": 240052.5
+      }
+    ];
+
+    const { getByTestId } = render(<Products products={products} />);
+    const product = getByTestId('Products');
+    expect(product).toBeInTheDocument();
+  });
 
 });

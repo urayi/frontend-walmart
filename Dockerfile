@@ -7,13 +7,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 
-# Testing
-# RUN npm test
-
 # Copia archivos
 COPY . .
 # Build para producción
 RUN npm run-script build
+
+# Testing
+# RUN npm test 
 
 # Borrado de archivos innecesarios
 RUN rm -rf README.md generate-react-cli.json package-lock.json public src yarn.lock

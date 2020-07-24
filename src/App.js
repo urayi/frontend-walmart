@@ -32,7 +32,7 @@ function App(props) {
   };
 
   return (
-    <div>
+    <div data-testid="App">
       <section>
         <div className="d-flex">
           <div id="header" className="header-info">
@@ -59,7 +59,7 @@ function App(props) {
                         <div className="ais-SearchBox">
                           <form className="ais-SearchBox-form" onSubmit={getProducts}>
                             <input type="search" placeholder="¿Qué estás buscando?" className="ais-SearchBox-input"
-                              value={search} onChange={e => setSearch(e.target.value)} />
+                              value={search} onChange={e => setSearch(e.target.value)} data-testid="search-bar"/>
                             <button type="submit" title="Submit your search query." className="ais-SearchBox-submit search-input-icons">
                               <svg className="ais-SearchBox-submitIcon"
                                 xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 40 40">
