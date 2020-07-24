@@ -1,40 +1,39 @@
-name: CI
+name: Integración continua para Frontend en prueba de Walmart
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [10.x]
-
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name:   Checkout
-    - uses: actions/checkout@v2
+      - name: Checkout
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm ci
 
-    - name: Dependencias
-      run: npm install
+      - name: Dependencias
+        run: npm install
 
-    #- name: Testing
-    #  run: npm test
-    
-    - name: Start
-      run: npm run-script build
+      - name: Dependencias
+        run: npm install
 
-    - name: Build, Push and Deploy to Heroku #set the whatever name you want to this step
-      id: heroku
-      uses: jctaveras/heroku-deploy@v2.0.0  # use the latest version of the action
-      with:
-        email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
-        api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
-        app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
-        dockerfile_path: '' # set the path to the folder wher the Dokerfile is located
-        options: '' # Docker Build Options
+      #- name: Testing
+      #  run: npm test
+
+      - name: Build, Push y Deploy a Heroku
+        id: heroku
+        uses: jctaveras/heroku-deploy@v2.0.0
+        with:
+          email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
+          dockerfile_path: "." # set the path to the folder wher the Dokerfile is located
+          options: "-t" # Docker Build Options
 
