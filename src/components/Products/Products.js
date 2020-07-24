@@ -23,7 +23,6 @@ const Products = (props) => (
             <small style={{ textDecoration: 'line-through', display: props.isPromotion ? null : 'none' }}>
               <NumberFormat value={item.price * 2} displayType={'text'} thousandSeparator='.' decimalSeparator=',' decimalScale={0} prefix={'$'} />
             </small>
-            <div className="spacer"></div>
             <div className={styles.ProductsButton}>
               <button className={styles.walmartAddCartButton}>Agregar</button>
             </div>

@@ -43,7 +43,7 @@ function App(props) {
             <div className="logo">
               <a href="/"><img alt="Lider Logo" src={logo} /></a>
             </div>
-            <div className="menu-icon-container">
+            <div className="menu-icon-container d-none d-md-block">
               <div style={{ cursor: 'pointer' }}>
                 <i className="zmdi zmdi-menu menu-icon"></i>
                 <div className="show-category">Categorías</div>
@@ -76,7 +76,7 @@ function App(props) {
             </div>
 
             <div className="cart-supermarket-width">
-              <div className="cart-container" style={{ backgroundColor: 'rgb(6, 86, 143)' }}>
+              <div className="cart-container d-none d-md-flex" style={{ backgroundColor: 'rgb(6, 86, 143)' }}>
                 <a aria-haspopup="true" href="/" className="p-0 nav-link" aria-expanded="false">
                   <div id="shoppingCart" className="d-flex justify-content-between shopping-cart-images">
                     <img alt="cart" src={liderCart} width="29" height="25" />
@@ -86,7 +86,7 @@ function App(props) {
                   </div>
                 </a>
               </div>
-              <div className="go-to-supermarket-link">
+              <div className="go-to-supermarket-link d-none d-md-block">
                 <a href="/" target="_blank" rel="noopener noreferrer">
                   <img alt="market-icon" width="20" src={marketIcon} style={{ marginRight: '5px' }} />Supermercado</a>
               </div>
@@ -103,7 +103,7 @@ function App(props) {
                 Resultados para <strong className="text-capitalize">{search}</strong>:
               </p>
             </div>
-            <button className="btn mb-3">Ordenar po: Destacados <i className="zmdi zmdi-chevron-right"></i></button>
+            <button className="btn mb-3 d-none d-sm-block">Ordenar po: Destacados <i className="zmdi zmdi-chevron-right"></i></button>
           </div>
           <div className="row">
             <div className="AppSidebar d-none d-lg-block col-lg-3">
@@ -111,13 +111,13 @@ function App(props) {
             </div>
             {
               !loading &&
-              <div className="col-lg-9 col-md-6 col-sm-12">
+              <div className="col-lg-9 col-12">
                 <Products products={products} isPromotion={isPromotion} />
               </div>
             }
             {
               loading &&
-              <div className="col-lg-9 col-md-6 col-sm-12 text-center">
+              <div className="col-lg-9 col-12 text-center">
                 <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
               </div>
             }
