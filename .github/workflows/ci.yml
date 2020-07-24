@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10
+
+      - name: Limpia la integración
         run: npm ci
 
       - name: Dependencias
