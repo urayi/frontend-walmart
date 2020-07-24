@@ -10,19 +10,23 @@ function App(props) {
   const [products, setProducts] = useState([]);
   const [isPromotion, setIsPromotion] = useState(false);
   const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const getProducts = (event) => {
+    setLoading(true);
     event.preventDefault();
-    fetch(`https://walmart-test-api.herokuapp.com/api/products?query=${search.trim()}`)
+    fetch(`https://walmart-back.herokuapp.com/api/products?query=${search.trim()}`)
       .then(res => res.json())
       .then(
         (result) => {
           setProducts(result.data);
           setIsPromotion(result.isPromotion);
           console.log(result);
+          setLoading(false);
         },
         (error) => {
           console.log(error);
+          setLoading(false);
         }
       )
   };
@@ -95,19 +99,28 @@ function App(props) {
         <div className="AppContainer">
           <div className="AppFilters">
             <div>
-              <p className="mb-10 pt-20" style={{fontSize: '18px', display: search && search !== '' ? null : 'none' }}>
+              <p className="mb-10 pt-20" style={{ fontSize: '18px', display: search && search !== '' ? null : 'none' }}>
                 Resultados para <strong className="text-capitalize">{search}</strong>:
               </p>
             </div>
             <button className="btn mb-3">Ordenar po: Destacados <i className="zmdi zmdi-chevron-right"></i></button>
           </div>
-          <div className="AppProducts d-flex">
-            <div className="AppSidebar col-lg-3 col-md-4">
+          <div className="row">
+            <div className="AppSidebar d-none d-lg-block col-lg-3">
               <h1>Filtros</h1>
             </div>
-            <div className="col-lg-9 col-md-8 col-sm-12">
-              <Products products={products} isPromotion={isPromotion} />
-            </div>
+            {
+              !loading &&
+              <div className="col-lg-9 col-md-6 col-sm-12">
+                <Products products={products} isPromotion={isPromotion} />
+              </div>
+            }
+            {
+              loading &&
+              <div className="col-lg-9 col-md-6 col-sm-12">
+                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+              </div>
+            }
           </div>
         </div>
       </section>
