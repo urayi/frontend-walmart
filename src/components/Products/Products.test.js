@@ -3,12 +3,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Products from './Products';
 
-describe('Sample Test', () => {
-  it('should test that true === true', () => {
-    expect(true).toBe(true)
-  })
-})
-
 describe('Renderizado inicial sin problemas', () => {
 
   let products = [];
